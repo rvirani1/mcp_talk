@@ -1,36 +1,55 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+[![MIT Licence](https://badges.frapsoft.com/os/mit/mit.png?v=103)](https://opensource.org/licenses/mit-license.php)
+[![Open Source Love](https://badges.frapsoft.com/os/v2/open-source.svg?v=103)](https://github.com/ellerbrock/open-source-badges/)
+[![TypeScript](https://badges.frapsoft.com/typescript/code/typescript.png?v=103)](https://github.com/ellerbrock/typescript-badges/)
 
-## Getting Started
+<p align="center">
+  <img src="public/logo.png">
+</p>
 
-First, run the development server:
+# APIs and IPAs MCP Talk
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+* [Overview](#overview)
+* [Live Website](#live-website)
+* [Running Locally](#running-locally)
+* [License](#license)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Overview
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+This talk is a solid technical-ish overview of MCP and how you can use it from the perspective of a web developer.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Note: Rather than using a boring Google Slides or PowerPoint. I thought I'd try something new. What if we just made a presentation as a simple website with all the interactive capability of the web? So this is my attempt 
 
-## Learn More
+## Live Website
 
-To learn more about Next.js, take a look at the following resources:
+If you just want to see the live website, check out:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+[MCP Talk](#)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
+# Running Locally
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+If you want to fiddle with this for your own purposes, run with it! The project is a simple plain vanilla Next.js App.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. Install the Node Version specified in the `.node-version` file via RVM or RBenv
+
+1. Clone the Repo and `cd` into it
+
+1. Install Node dependencies via `npm install`
+
+1. Copy the `.env.example` file to `.env`
+
+1. Set all values in the `.env` file.
+  This is already gitignored so don't worry about committing it.
+
+1. Run the server using `npm run dev`
+
+1. Experience glory!
+
+# License
+
+This project is licensed under the [MIT](./LICENSE)
+
+# Contributions
+
+This presentation was created by Riaz Virani. [DreamsN.Codes](https://www.dreamsn.codes)
+
