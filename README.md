@@ -3,7 +3,7 @@
 [![TypeScript](https://badges.frapsoft.com/typescript/code/typescript.png?v=103)](https://github.com/ellerbrock/typescript-badges/)
 
 <p align="center">
-  <img src="public/logo.png">
+  <img src="public/logo.png" width="300">
 </p>
 
 # APIs and IPAs MCP Talk
