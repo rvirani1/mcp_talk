@@ -9,5 +9,6 @@ export default function McpArchitecture() {
     <p>A client that uses MCP to interact with other applications</p>
     <h2>LLM</h2>
     <p>The LLM usually running in a cloud provider or a foundation model provider, OpenAI, Anthropic, Google, etc.</p>
+    <p>Communicates via JSON-RPC 2.0 or stdio and SSE</p>
   </div>
 }
