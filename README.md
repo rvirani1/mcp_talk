@@ -23,7 +23,7 @@ Note: Rather than using a boring Google Slides or PowerPoint. I thought I'd try 
 
 If you just want to see the live website, check out:
 
-[MCP Talk](#)
+[MCP Talk](https://mcp-talk.dreamsn.codes)
 
 
 # Running Locally
