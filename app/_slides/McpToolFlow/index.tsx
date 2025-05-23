@@ -50,71 +50,45 @@ const AIIcon = () => (
   </svg>
 )
 
-// Speech Bubble Component
-interface SpeechBubbleProps {
-  text: string
-  tailDirection: 'left' | 'right' | 'bottom'
-  visible: boolean
-}
-
-const SpeechBubble = ({ text, tailDirection, visible }: SpeechBubbleProps) => {
-  if (!visible) return null
-
-  const getTailClasses = (direction: 'left' | 'right' | 'bottom') => {
-    if (direction === 'left') {
-      return 'top-1/2 -left-4 transform -translate-y-1/2 border-t-[16px] border-b-[16px] border-r-[16px] border-t-transparent border-b-transparent border-r-white dark:border-r-gray-800'
-    }
-    if (direction === 'right') {
-      return 'top-1/2 -right-4 transform -translate-y-1/2 border-t-[16px] border-b-[16px] border-l-[16px] border-t-transparent border-b-transparent border-l-white dark:border-l-gray-800'
-    }
-    return 'left-1/2 -bottom-4 transform -translate-x-1/2 border-l-[16px] border-r-[16px] border-t-[16px] border-l-transparent border-r-transparent border-t-white dark:border-t-gray-800'
-  }
-
-  return (
-    <motion.div
-      initial={{ opacity: 0, scale: 0.8 }}
-      animate={{ opacity: 1, scale: 1 }}
-      exit={{ opacity: 0, scale: 0.8 }}
-      className="absolute top-1/3 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10"
-    >
-      <div className="relative bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-2xl border-2 border-gray-200 dark:border-gray-600 max-w-md">
-        <p className="text-2xl font-medium text-gray-800 dark:text-gray-200 text-center leading-relaxed">
-          {text}
-        </p>
-        
-        {/* Speech bubble tail */}
-        <div className={`absolute w-0 h-0 ${getTailClasses(tailDirection)}`} />
-      </div>
-    </motion.div>
-  )
-}
-
-// Directional Arrow Component
-interface DirectionalArrowProps {
+// Bidirectional Arrow Component with Label
+interface BidirectionalArrowProps {
   fromX: number
   fromY: number
   toX: number
   toY: number
   color: string
   visible: boolean
+  label: string
 }
 
-const DirectionalArrow = ({ fromX, fromY, toX, toY, color, visible }: DirectionalArrowProps) => {
+const BidirectionalArrow = ({ fromX, fromY, toX, toY, color, visible, label }: BidirectionalArrowProps) => {
   if (!visible) return null
 
-  // Calculate arrow angle for arrowhead
+  // Calculate arrow angle and midpoint
   const angle = Math.atan2(toY - fromY, toX - fromX)
-  const arrowHeadLength = 20
+  const midX = (fromX + toX) / 2
+  const midY = (fromY + toY) / 2
+  const arrowHeadLength = 15
   const arrowHeadAngle = Math.PI / 6
 
-  // Arrowhead points
-  const arrowHead1X = toX - arrowHeadLength * Math.cos(angle - arrowHeadAngle)
-  const arrowHead1Y = toY - arrowHeadLength * Math.sin(angle - arrowHeadAngle)
-  const arrowHead2X = toX - arrowHeadLength * Math.cos(angle + arrowHeadAngle)
-  const arrowHead2Y = toY - arrowHeadLength * Math.sin(angle + arrowHeadAngle)
+  // Arrowhead points for both ends
+  const arrowHead1X = fromX + arrowHeadLength * Math.cos(angle - arrowHeadAngle)
+  const arrowHead1Y = fromY + arrowHeadLength * Math.sin(angle - arrowHeadAngle)
+  const arrowHead2X = fromX + arrowHeadLength * Math.cos(angle + arrowHeadAngle)
+  const arrowHead2Y = fromY + arrowHeadLength * Math.sin(angle + arrowHeadAngle)
+
+  const arrowHead3X = toX - arrowHeadLength * Math.cos(angle - arrowHeadAngle)
+  const arrowHead3Y = toY - arrowHeadLength * Math.sin(angle - arrowHeadAngle)
+  const arrowHead4X = toX - arrowHeadLength * Math.cos(angle + arrowHeadAngle)
+  const arrowHead4Y = toY - arrowHeadLength * Math.sin(angle + arrowHeadAngle)
 
   return (
-    <>
+    <motion.g
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.5 }}
+    >
       {/* Main arrow line */}
       <motion.line
         x1={fromX}
@@ -122,74 +96,84 @@ const DirectionalArrow = ({ fromX, fromY, toX, toY, color, visible }: Directiona
         x2={toX}
         y2={toY}
         stroke={color}
-        strokeWidth='3'
-        strokeDasharray='8,4'
+        strokeWidth='4'
         initial={{ pathLength: 0 }}
         animate={{ pathLength: 1 }}
         transition={{ duration: 0.8, ease: 'easeInOut' }}
       />
       
-      {/* Arrowhead */}
+      {/* Left arrowhead */}
       <motion.polygon
-        points={`${toX},${toY} ${arrowHead1X},${arrowHead1Y} ${arrowHead2X},${arrowHead2Y}`}
+        points={`${fromX},${fromY} ${arrowHead1X},${arrowHead1Y} ${arrowHead2X},${arrowHead2Y}`}
         fill={color}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.6, duration: 0.3 }}
       />
-    </>
+
+      {/* Right arrowhead */}
+      <motion.polygon
+        points={`${toX},${toY} ${arrowHead3X},${arrowHead3Y} ${arrowHead4X},${arrowHead4Y}`}
+        fill={color}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.6, duration: 0.3 }}
+      />
+
+      {/* Label */}
+      <motion.text
+        x={midX}
+        y={midY - 172}
+        textAnchor="middle"
+        className="fill-gray-800 dark:fill-gray-200 text-2xl font-bold"
+        initial={{ opacity: 0, y: midY }}
+        animate={{ opacity: 1, y: midY - 172 }}
+        transition={{ delay: 0.8, duration: 0.3 }}
+      >
+        {label}
+      </motion.text>
+    </motion.g>
   )
 }
 
 // Stage Configuration
 interface Stage {
   id: number
-  aiToClientArrow?: boolean
-  clientToAiArrow?: boolean
-  serverToClientArrow?: boolean
-  clientToServerArrow?: boolean
-  speechBubble?: {
-    text: string
-    tailDirection: 'left' | 'right' | 'bottom'
+  aiClientBidirectional?: {
+    label: string
   }
+  clientServerBidirectional?: {
+    label: string
+  }
+  showClientServerLabels?: boolean
 }
 
 const stages: Stage[] = [
   {
     id: 0,
-    // Default state - no arrows or speech bubbles
+    // Default state - no arrows
   },
   {
-    aiToClientArrow: true,
+    clientServerBidirectional: {
+      label: 'JSON RPC or STDIO',
+    },
     id: 1,
-    speechBubble: {
-      tailDirection: 'left',
-      text: 'User sends request to AI through MCP Client',
-    },
   },
   {
-    clientToServerArrow: true,
+    clientServerBidirectional: {
+      label: 'Optional OAuth 2',
+    },
     id: 2,
-    speechBubble: {
-      tailDirection: 'right',
-      text: 'Client calls MCP Server for external data',
-    },
   },
   {
+    aiClientBidirectional: {
+      label: 'AI SDK',
+    },
     id: 3,
-    serverToClientArrow: true,
-    speechBubble: {
-      tailDirection: 'bottom',
-      text: 'Server returns data to Client',
-    },
   },
   {
-    clientToAiArrow: true,
     id: 4,
-    speechBubble: {
-      tailDirection: 'left',
-      text: 'Client sends data to AI Model',
-    },
+    showClientServerLabels: true,
   },
 ]
 
@@ -292,9 +276,9 @@ export default function McpToolFlow() {
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === 'Escape') {
       setModalType(null)
-    } else if (e.key === 'ArrowRight' || e.key === ' ') {
+    } else if (e.key === 'ArrowDown' || e.key === ' ') {
       setCurrentStage(prev => Math.min(prev + 1, stages.length - 1))
-    } else if (e.key === 'ArrowLeft') {
+    } else if (e.key === 'ArrowUp') {
       setCurrentStage(prev => Math.max(prev - 1, 0))
     }
   }
@@ -303,54 +287,36 @@ export default function McpToolFlow() {
 
   return (
     <div className="h-screen flex flex-col items-center justify-center w-full" onKeyDown={handleKeyDown} tabIndex={0}>
-      <h1 className="text-6xl font-black mb-12 text-black drop-shadow-lg">The Real TLDR</h1>
+      <h1 className="text-6xl font-black mb-12 text-black drop-shadow-lg">The Major Players</h1>
       
       <div className="relative w-full max-w-7xl h-[500px]">
         <svg width="100%" height="100%" viewBox="0 0 1200 500" className="absolute inset-0">
-          {/* Directional Arrows */}
-          <DirectionalArrow
-            fromX={200}
-            fromY={100}
-            toX={500}
-            toY={350}
-            color="rgba(59, 130, 246, 0.8)"
-            visible={Boolean(currentStageConfig.aiToClientArrow)}
-          />
-          
-          <DirectionalArrow
-            fromX={500}
-            fromY={350}
-            toX={200}
-            toY={120}
-            color="rgba(59, 130, 246, 0.8)"
-            visible={Boolean(currentStageConfig.clientToAiArrow)}
-          />
-          
-          <DirectionalArrow
-            fromX={1000}
-            fromY={100}
-            toX={700}
-            toY={350}
-            color="rgba(34, 197, 94, 0.8)"
-            visible={Boolean(currentStageConfig.serverToClientArrow)}
-          />
-          
-          <DirectionalArrow
-            fromX={700}
-            fromY={350}
-            toX={1000}
-            toY={120}
-            color="rgba(34, 197, 94, 0.8)"
-            visible={Boolean(currentStageConfig.clientToServerArrow)}
-          />
+          {/* Client-Server Bidirectional Arrow */}
+          {currentStageConfig.clientServerBidirectional && (
+            <BidirectionalArrow
+              fromX={700}
+              fromY={350}
+              toX={1000}
+              toY={120}
+              color="rgba(34, 197, 94, 0.8)"
+              visible={true}
+              label={currentStageConfig.clientServerBidirectional.label}
+            />
+          )}
+
+          {/* AI-Client Bidirectional Arrow */}
+          {currentStageConfig.aiClientBidirectional && (
+            <BidirectionalArrow
+              fromX={200}
+              fromY={120}
+              toX={500}
+              toY={350}
+              color="rgba(168, 85, 247, 0.8)"
+              visible={true}
+              label={currentStageConfig.aiClientBidirectional.label}
+            />
+          )}
         </svg>
-        
-        {/* Speech Bubble */}
-        <SpeechBubble
-          text={currentStageConfig.speechBubble?.text || ''}
-          tailDirection={currentStageConfig.speechBubble?.tailDirection || 'bottom'}
-          visible={Boolean(currentStageConfig.speechBubble)}
-        />
         
         {/* AI (LLM) - Top Left */}
         <motion.button
@@ -382,10 +348,24 @@ export default function McpToolFlow() {
           whileTap={{ scale: 0.95 }}
         >
           <div className="text-green-600 dark:text-green-400 mb-3">
-            <ServerIcon />
+            {currentStageConfig.showClientServerLabels ? (
+              <div className="flex items-center space-x-2">
+                <div className="scale-75">
+                  <ClientIcon />
+                </div>
+                <span className="text-4xl font-bold">/</span>
+                <div className="scale-75">
+                  <ServerIcon />
+                </div>
+              </div>
+            ) : (
+              <ServerIcon />
+            )}
           </div>
           <div className="text-center">
-            <h3 className="font-bold text-3xl text-gray-800 dark:text-gray-200">MCP Server</h3>
+            <h3 className="font-bold text-3xl text-gray-800 dark:text-gray-200">
+              {currentStageConfig.showClientServerLabels ? 'MCP Client/Server' : 'MCP Server'}
+            </h3>
             <p className="text-lg text-gray-600 dark:text-gray-400">External APIs & Tools</p>
           </div>
         </motion.button>
@@ -401,40 +381,27 @@ export default function McpToolFlow() {
           whileTap={{ scale: 0.95 }}
         >
           <div className="text-blue-600 dark:text-blue-400 mb-3">
-            <ClientIcon />
+            {currentStageConfig.showClientServerLabels ? (
+              <div className="flex items-center space-x-2">
+                <div className="scale-75">
+                  <ClientIcon />
+                </div>
+                <span className="text-4xl font-bold">/</span>
+                <div className="scale-75">
+                  <ServerIcon />
+                </div>
+              </div>
+            ) : (
+              <ClientIcon />
+            )}
           </div>
           <div className="text-center">
-            <h3 className="font-bold text-3xl text-gray-800 dark:text-gray-200">MCP Client</h3>
+            <h3 className="font-bold text-3xl text-gray-800 dark:text-gray-200">
+              {currentStageConfig.showClientServerLabels ? 'MCP Client/Server' : 'MCP Client'}
+            </h3>
             <p className="text-lg text-gray-600 dark:text-gray-400">Claude Desktop, Cursor, etc.</p>
           </div>
         </motion.button>
-      </div>
-
-      {/* Stage Navigation Controls */}
-      <div className="fixed bottom-8 left-1/2 transform -translate-x-1/2 flex items-center space-x-4 bg-white dark:bg-gray-800 rounded-full px-6 py-3 shadow-lg border">
-        <button
-          onClick={() => setCurrentStage(prev => Math.max(prev - 1, 0))}
-          disabled={currentStage === 0}
-          className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed"
-        >
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-            <path d="M15 18L9 12L15 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-          </svg>
-        </button>
-        
-        <span className="text-sm font-medium text-gray-600 dark:text-gray-400">
-          {currentStage + 1} / {stages.length}
-        </span>
-        
-        <button
-          onClick={() => setCurrentStage(prev => Math.min(prev + 1, stages.length - 1))}
-          disabled={currentStage === stages.length - 1}
-          className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed"
-        >
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-            <path d="M9 18L15 12L9 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-          </svg>
-        </button>
       </div>
 
       {/* Modal */}
