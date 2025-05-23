@@ -104,7 +104,7 @@ export default function McPSectionIntroSlide() {
     {
       description: 'Public RFCs and steering committee with OpenAI, GitHub, and Microsoft',
       icon: <OpenIcon />,
-      title: 'Open',
+      title: 'Open Source',
     },
     {
       description: 'Language Server Protocol is used by code editors to support multiple languages',
