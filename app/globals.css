@@ -22,12 +22,8 @@ code {
 
 h1 {
   font-family: var(--font-space-grotesk);
-  font-weight: 700;
-  font-size: 5rem;
 }
 
 h3 {
   font-family: var(--font-space-grotesk);
-  font-weight: 400;
-  font-size: 2rem;
 }

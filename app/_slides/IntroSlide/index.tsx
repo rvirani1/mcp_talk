@@ -8,8 +8,8 @@ import ViraniRiazPhoto from './virani_riaz.jpg'
 export default function IntroSlide() {
   return <div className="flex flex-col items-center justify-center h-full">
     <Image src={ApisIpasLogo} alt="APIs & IPAS Logo" width={200} height={200} />
-    <h1 className="text-5xl font-bold">Model Context Protocol</h1>
-    <h3 className="text-2xl font-bold">Connecting the Dots in the AI Ecosystem</h3>
+    <h1 className="text-7xl font-bold">Model Context Protocol</h1>
+    <h3 className="text-3xl font-medium">Connecting the Dots in the AI Ecosystem</h3>
     <div className="mt-16 space-y-4 text-center">
       <p className="text-xl">With</p>
       <Image
