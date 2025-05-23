@@ -3,6 +3,7 @@ import CommunitySlide from './CommunitySlide'
 import DeckIsAnApp from './DeckIsAnApp'
 import IntroSlide from './IntroSlide'
 import McpArchitecture from './McpArchitecture'
+import McpToolFlow from './McpToolFlow'
 import McpCapabilities from './McpCapabilities'
 import McPSectionIntroSlide from './McPSectionIntroSlide'
 import PersonalSlide from './PersonalSlide'
@@ -23,6 +24,7 @@ export const SLIDES: { Content: SlideContentComponent, id: string }[] = [
   { Content: CommunitySlide, id: 'slide3' },
   { Content: ThoughtsOnAIJobMarket, id: 'slide5' },
   { Content: QuestionsSlide, id: 'slide6' },
+  { Content: McpToolFlow, id: 'slide11' },
   // Separation to ready slides
   { Content: IntroSlide, id: 'slide1' },
   { Content: PersonalSlide, id: 'slide2' },
