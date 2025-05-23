@@ -2,47 +2,23 @@
 
 import React, { useState, useEffect, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import Slide1Content from '../_slides/01_slide'
-import Slide2Content from '../_slides/02_slide'
+import { SLIDES, FADE_VARIANTS } from '../_slides'
 import Slide from './Slide'
-// Note: globals.css is imported in the main page.tsx
-
-// Define a type for slide content components
-type SlideContentComponent = React.FC
-
-const slides: { Content: SlideContentComponent, id: string }[] = [
-  { Content: Slide1Content, id: 'slide1' },
-  { Content: Slide2Content, id: 'slide2' },
-]
-
-const fadeVariants = {
-  animate: {
-    opacity: 1,
-    transition: { duration: 0.3, ease: 'easeInOut' },
-  },
-  exit: {
-    opacity: 0,
-    transition: { duration: 0.3, ease: 'easeInOut' },
-  },
-  initial: {
-    opacity: 0,
-  },
-}
 
 export default function Presentation() {
   const [currentSlide, setCurrentSlide] = useState(0)
 
   const nextSlide = useCallback(() => {
-    setCurrentSlide(prev => (prev + 1) % slides.length)
+    setCurrentSlide(prev => (prev + 1) % SLIDES.length)
   }, [])
 
   const prevSlide = useCallback(() => {
-    setCurrentSlide(prev => (prev - 1 + slides.length) % slides.length)
+    setCurrentSlide(prev => (prev - 1 + SLIDES.length) % SLIDES.length)
   }, [])
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'ArrowRight') {
+      if (event.key === 'ArrowRight' || event.key === ' ') {
         nextSlide()
       } else if (event.key === 'ArrowLeft') {
         prevSlide()
@@ -55,14 +31,14 @@ export default function Presentation() {
     }
   }, [nextSlide, prevSlide])
 
-  const CurrentSlideDetails = slides[currentSlide]
+  const CurrentSlideDetails = SLIDES[currentSlide]
 
   return (
     <div>
       <AnimatePresence mode="wait">
         <motion.div
           key={CurrentSlideDetails.id}
-          variants={fadeVariants}
+          variants={FADE_VARIANTS}
           initial="initial"
           animate="animate"
           exit="exit"
