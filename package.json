@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint:fix": "eslint --cache . --fix && npm run ts",
-    "lint": "eslint --cache . && npm run ts"
+    "lint": "eslint --cache . && npm run ts",
+    "ts": "tsc --noEmit --incremental"
   },
   "engines": {
     "node": "22.16.0"
