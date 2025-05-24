@@ -327,10 +327,10 @@ export default function McpCapabilities() {
   }
 
   return (
-    <div className="min-h-screen p-6 flex flex-col max-w-7xl mx-auto w-full">
+    <div className="min-h-screen p-6 flex flex-col max-w-7xl mx-auto w-full pt-12">
       <PageHeader title="MCP Capabilities" />
 
-      <div className="flex-1 relative overflow-hidden">
+      <div className="flex-1 relative overflow-hidden mt-16">
         {/* Main Content Area */}
         <motion.div 
           className="w-full flex flex-col"

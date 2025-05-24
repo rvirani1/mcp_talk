@@ -88,16 +88,15 @@ const BidirectionalArrow = ({ fromX, fromY, toX, toY, color, visible, label }: B
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      transition={{ duration: 0.5 }}
+      transition={{ duration: 0.3 }}
     >
-      {/* Main arrow line */}
-      <motion.line
-        x1={fromX}
-        y1={fromY}
-        x2={toX}
-        y2={toY}
+      {/* Main arrow line - converted to path for pathLength animation */}
+      <motion.path
+        d={`M ${fromX} ${fromY} L ${toX} ${toY}`}
         stroke={color}
-        strokeWidth='4'
+        strokeWidth="4"
+        fill="none"
+        strokeLinecap="round"
         initial={{ pathLength: 0 }}
         animate={{ pathLength: 1 }}
         transition={{ duration: 0.8, ease: 'easeInOut' }}
@@ -107,18 +106,18 @@ const BidirectionalArrow = ({ fromX, fromY, toX, toY, color, visible, label }: B
       <motion.polygon
         points={`${fromX},${fromY} ${arrowHead1X},${arrowHead1Y} ${arrowHead2X},${arrowHead2Y}`}
         fill={color}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.6, duration: 0.3 }}
+        initial={{ opacity: 0, scale: 0 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ delay: 0.6, duration: 0.3, ease: 'easeOut' }}
       />
 
       {/* Right arrowhead */}
       <motion.polygon
         points={`${toX},${toY} ${arrowHead3X},${arrowHead3Y} ${arrowHead4X},${arrowHead4Y}`}
         fill={color}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.6, duration: 0.3 }}
+        initial={{ opacity: 0, scale: 0 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ delay: 0.6, duration: 0.3, ease: 'easeOut' }}
       />
 
       {/* Label */}
@@ -127,9 +126,9 @@ const BidirectionalArrow = ({ fromX, fromY, toX, toY, color, visible, label }: B
         y={midY - 172}
         textAnchor="middle"
         className="fill-gray-800 dark:fill-gray-200 text-2xl font-bold"
-        initial={{ opacity: 0, y: midY }}
-        animate={{ opacity: 1, y: midY - 172 }}
-        transition={{ delay: 0.8, duration: 0.3 }}
+        initial={{ opacity: 0, scale: 0.8, y: midY - 20 }}
+        animate={{ opacity: 1, scale: 1, y: midY - 172 }}
+        transition={{ delay: 0.9, duration: 0.4, ease: 'easeOut' }}
       >
         {label}
       </motion.text>
