@@ -1,5 +1,6 @@
 import { motion, AnimatePresence } from 'framer-motion'
 import { useState } from 'react'
+import PageHeader from '@/app/_components/PageHeader'
 
 // Icon components
 const ClientIcon = () => (
@@ -287,8 +288,8 @@ export default function McpToolFlow() {
 
   return (
     <div className="h-screen flex flex-col items-center justify-center w-full" onKeyDown={handleKeyDown} tabIndex={0}>
-      <h1 className="text-6xl font-black mb-12 text-black drop-shadow-lg">The Major Players</h1>
-      
+      <PageHeader title="The Major Players" />
+
       <div className="relative w-full max-w-7xl h-[500px]">
         <svg width="100%" height="100%" viewBox="0 0 1200 500" className="absolute inset-0">
           {/* Client-Server Bidirectional Arrow */}

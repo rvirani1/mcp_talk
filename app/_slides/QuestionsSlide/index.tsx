@@ -1,12 +1,15 @@
 import Image from 'next/image'
 import QrCodeDreamsnCodes from './qrcode_dreamsn_codes.png'
+import PageHeader from '@/app/_components/PageHeader'
 
 export default function QuestionsSlide() {
   return <div>
-    <h1>Questions</h1>
-    <div className="flex flex-col items-center justify-center">
-      <Image src={QrCodeDreamsnCodes} alt="Qr Code Dreamsn Codes" width={200} height={200} />
-      <p className="text-2xl">Dreamsn Codes</p>
+    <PageHeader title="Questions?" />
+    <div className="flex items-center justify-center gap-8">
+      <div>
+        <Image src={QrCodeDreamsnCodes} alt="Qr Code Dreamsn Codes" width={400} height={400} className="rounded-xl" />
+        <p className="text-2xl text-center">My (Teeny) Site</p>
+      </div>
     </div>
   </div>
 }

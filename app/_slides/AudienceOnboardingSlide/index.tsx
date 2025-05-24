@@ -1,6 +1,8 @@
+import PageHeader from '@/app/_components/PageHeader'
+
 export default function AudienceOnboardingSlide() {
   return <div>
-    <h1>Audience Onboarding</h1>
+    <PageHeader title="Scan If You Dare" />
     <p>TODO: QR code to jump in the chat</p>
   </div>
 }

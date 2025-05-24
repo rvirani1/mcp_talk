@@ -14,20 +14,20 @@ type SlideContentComponent = React.FC
 
 export const SLIDES: { Content: SlideContentComponent, id: string }[] = [
   // Current Slide
-  { Content: McpCapabilities, id: 'slide9' },
   
   // Slides to build
-  { Content: ThingsThatDoNotWork, id: 'slide8' },
   { Content: AudienceOnboardingSlide, id: 'slide4' },
-  { Content: ThoughtsOnAIJobMarket, id: 'slide5' },
-  { Content: QuestionsSlide, id: 'slide6' },
   // Separation to ready slides
   { Content: IntroSlide, id: 'slide1' },
   { Content: PersonalSlide, id: 'slide2' },
   { Content: DeckIsAnApp, id: 'slide7' },
   { Content: McPSectionIntroSlide, id: 'slide7' },
-  { Content: McpToolFlow, id: 'slide11' },
   { Content: McpArchitecture, id: 'slide10' },
+  { Content: McpToolFlow, id: 'slide11' },
+  { Content: McpCapabilities, id: 'slide9' },
+  { Content: ThingsThatDoNotWork, id: 'slide8' },
+  { Content: ThoughtsOnAIJobMarket, id: 'slide5' },
+  { Content: QuestionsSlide, id: 'slide6' },
 ]
 
 export const FADE_VARIANTS = {
