@@ -14,10 +14,9 @@ type SlideContentComponent = React.FC
 
 export const SLIDES: { Content: SlideContentComponent, id: string }[] = [
   // Current Slide
-  { Content: McpToolFlow, id: 'slide11' },
+  { Content: McpCapabilities, id: 'slide9' },
   
   // Slides to build
-  { Content: McpCapabilities, id: 'slide9' },
   { Content: ThingsThatDoNotWork, id: 'slide8' },
   { Content: AudienceOnboardingSlide, id: 'slide4' },
   { Content: ThoughtsOnAIJobMarket, id: 'slide5' },
@@ -27,6 +26,7 @@ export const SLIDES: { Content: SlideContentComponent, id: string }[] = [
   { Content: PersonalSlide, id: 'slide2' },
   { Content: DeckIsAnApp, id: 'slide7' },
   { Content: McPSectionIntroSlide, id: 'slide7' },
+  { Content: McpToolFlow, id: 'slide11' },
   { Content: McpArchitecture, id: 'slide10' },
 ]
 
