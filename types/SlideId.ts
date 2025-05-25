@@ -1,4 +1,5 @@
 export enum SlideId {
+  StartSlide = 'start',
   TitleSlide = 'intro',
   PersonalSlide = 'personal',
   DeckIsAnApp = 'deck-is-an-app',
@@ -13,6 +14,7 @@ export enum SlideId {
 }
 
 export const PRETTY_SLIDE_IDS = {
+  [SlideId.StartSlide]: 'Start Slide',
   [SlideId.TitleSlide]: 'Title Slide',
   [SlideId.PersonalSlide]: 'Hi, I\'m Riaz',
   [SlideId.DeckIsAnApp]: 'Deck Is An App',

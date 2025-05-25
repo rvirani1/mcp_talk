@@ -9,12 +9,14 @@ import PersonalSlide from './PersonalSlide'
 import QuestionsSlide from './QuestionsSlide'
 import UnknownAndUnanswered from './UnknownAndUnanswered'
 import ThoughtsOnAIJobMarket from './WillAiTakeYourJob'
+import StartSlide from './StartSlide'
 import { SlideId } from '@/types/SlideId'
 
 type SlideContentComponent = React.FC
 
 export const SLIDES: { Content: SlideContentComponent, id: string }[] = [
   // Current Slide
+  { Content: StartSlide, id: SlideId.StartSlide },
   { Content: TitleSlide, id: SlideId.TitleSlide },
   { Content: PersonalSlide, id: SlideId.PersonalSlide },
   { Content: DeckIsAnApp, id: SlideId.DeckIsAnApp },
