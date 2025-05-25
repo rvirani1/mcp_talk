@@ -20,10 +20,10 @@ export default function Carousel({ items }: CarouselProps) {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'ArrowDown') {
         event.preventDefault()
-        setCurrentIndex(prev => (prev + 1) % items.length)
+        setCurrentIndex(prev => prev < items.length - 1 ? prev + 1 : prev)
       } else if (event.key === 'ArrowUp') {
         event.preventDefault()
-        setCurrentIndex(prev => (prev - 1 + items.length) % items.length)
+        setCurrentIndex(prev => prev > 0 ? prev - 1 : prev)
       }
     }
 
