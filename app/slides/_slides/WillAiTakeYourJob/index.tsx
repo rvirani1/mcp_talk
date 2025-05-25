@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import PageHeader from '@/app/presenter/_components/PageHeader'
+import PageHeader from '@/app/slides/_components/PageHeader'
 
 export default function ThoughtsOnAIJobMarket() {
   const [currentStage, setCurrentStage] = useState(0)

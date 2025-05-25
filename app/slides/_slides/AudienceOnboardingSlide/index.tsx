@@ -1,4 +1,4 @@
-import PageHeader from '@/app/presenter/_components/PageHeader'
+import PageHeader from '@/app/slides/_components/PageHeader'
 
 export default function AudienceOnboardingSlide() {
   return <div>

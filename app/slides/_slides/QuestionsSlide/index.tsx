@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import QrCodeDreamsnCodes from './qrcode_dreamsn_codes.png'
-import PageHeader from '@/app/presenter/_components/PageHeader'
+import PageHeader from '@/app/slides/_components/PageHeader'
 
 export default function QuestionsSlide() {
   return <div>
