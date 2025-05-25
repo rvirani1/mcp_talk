@@ -1,6 +1,6 @@
 import { motion, AnimatePresence } from 'framer-motion'
 import { useState } from 'react'
-import PageHeader from '@/app/_components/PageHeader'
+import PageHeader from '@/app/presenter/_components/PageHeader'
 
 // Icon components
 const ClientIcon = () => (

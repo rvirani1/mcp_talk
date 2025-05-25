@@ -87,7 +87,7 @@ const cardVariants = {
   },
 }
 
-export default function McPSectionIntroSlide() {
+export default function McpOverview() {
   const [stage, setStage] = useState(0)
 
   const cards = [

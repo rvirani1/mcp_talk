@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import PageHeader from '../../_components/PageHeader'
 
-export default function ThingsThatDoNotWork() {
+export default function UnknownAndUnanswered() {
   const [visibleCards, setVisibleCards] = useState(0)
 
   const challenges = [
