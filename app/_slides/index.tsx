@@ -1,4 +1,3 @@
-import AudienceOnboardingSlide from './AudienceOnboardingSlide'
 import DeckIsAnApp from './DeckIsAnApp'
 import TitleSlide from './TitleSlide'
 import McpArchitecture from './McpArchitecture'
@@ -10,6 +9,8 @@ import QuestionsSlide from './QuestionsSlide'
 import UnknownAndUnanswered from './UnknownAndUnanswered'
 import ThoughtsOnAIJobMarket from './WillAiTakeYourJob'
 import StartSlide from './StartSlide'
+import LinkToTalkSlide from './LinkToTalkSlide'
+import DemoSlide from './DemoSlide'
 import { SlideId } from '@/types/SlideId'
 
 type SlideContentComponent = React.FC
@@ -20,14 +21,15 @@ export const SLIDES: { Content: SlideContentComponent, id: string }[] = [
   { Content: TitleSlide, id: SlideId.TitleSlide },
   { Content: PersonalSlide, id: SlideId.PersonalSlide },
   { Content: DeckIsAnApp, id: SlideId.DeckIsAnApp },
-  { Content: AudienceOnboardingSlide, id: SlideId.AudienceOnboardingSlide },
   { Content: McpOverview, id: SlideId.McPSectionIntroSlide },
   { Content: McpToolFlow, id: SlideId.McpToolFlow },
   { Content: McpArchitecture, id: SlideId.McpArchitecture },
   { Content: McpCapabilities, id: SlideId.McpCapabilities },
   { Content: UnknownAndUnanswered, id: SlideId.UnknownAndUnanswered },
+  { Content: DemoSlide, id: SlideId.DemoSlide },
   { Content: ThoughtsOnAIJobMarket, id: SlideId.WillAiTakeYourJob },
   { Content: QuestionsSlide, id: SlideId.QuestionsSlide },
+  { Content: LinkToTalkSlide, id: SlideId.LinkToTalkSlide },
 ]
 
 export const FADE_VARIANTS = {

@@ -48,7 +48,7 @@ export default function UnknownAndUnanswered() {
         {challenges.map((challenge, index) => (
           <div 
             key={index}
-            className={`rounded-2xl border border-grey-50 border-opacity-50 p-12 flex flex-row items-center text-left transition-all duration-500 transform ${
+            className={`rounded-2xl p-12 flex flex-row items-center text-left transition-all duration-500 transform ${
               index < visibleCards 
                 ? 'opacity-100 translate-x-0' 
                 : 'opacity-0 translate-x-8'

@@ -36,11 +36,6 @@ If you want to fiddle with this for your own purposes, run with it! The project 
 
 1. Install Node dependencies via `npm install`
 
-1. Copy the `.env.example` file to `.env`
-
-1. Set all values in the `.env` file.
-  This is already gitignored so don't worry about committing it.
-
 1. Run the server using `npm run dev`
 
 1. Experience glory!

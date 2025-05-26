@@ -11,10 +11,9 @@
     "ts": "tsc --noEmit --incremental"
   },
   "engines": {
-    "node": "22.16.0"
+    "node": "22"
   },
   "dependencies": {
-    "@supabase/supabase-js": "^2.49.8",
     "framer-motion": "^12.12.1",
     "next": "15.3.2",
     "react": "^19.0.0",

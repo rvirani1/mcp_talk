@@ -1,9 +1,9 @@
 export enum SlideId {
   StartSlide = 'start',
+  DemoSlide = 'demo',
   TitleSlide = 'intro',
   PersonalSlide = 'personal',
   DeckIsAnApp = 'deck-is-an-app',
-  AudienceOnboardingSlide = 'audience-onboarding',
   McPSectionIntroSlide = 'mcp-section-intro',
   McpToolFlow = 'mcp-tool-flow',
   McpArchitecture = 'mcp-architecture',
@@ -11,14 +11,15 @@ export enum SlideId {
   UnknownAndUnanswered = 'unknowns-and-unanswered-questions',
   WillAiTakeYourJob = 'thoughts-on-ai-job-market',
   QuestionsSlide = 'questions',
+  LinkToTalkSlide = 'link-to-talk',
 }
 
 export const PRETTY_SLIDE_IDS = {
   [SlideId.StartSlide]: 'Start Slide',
+  [SlideId.DemoSlide]: 'Demo Slide',
   [SlideId.TitleSlide]: 'Title Slide',
   [SlideId.PersonalSlide]: 'Hi, I\'m Riaz',
   [SlideId.DeckIsAnApp]: 'Deck Is An App',
-  [SlideId.AudienceOnboardingSlide]: 'Get Onboarded',
   [SlideId.McPSectionIntroSlide]: 'MCP Overview',
   [SlideId.McpToolFlow]: 'MCP Tool Flow',
   [SlideId.McpArchitecture]: 'MCP Architecture',
@@ -26,4 +27,5 @@ export const PRETTY_SLIDE_IDS = {
   [SlideId.UnknownAndUnanswered]: 'Unknowns and Unanswered Questions',
   [SlideId.WillAiTakeYourJob]: 'Will AI Take Your Job?',
   [SlideId.QuestionsSlide]: 'Questions',
+  [SlideId.LinkToTalkSlide]: 'Link To Talk',
 }
