@@ -11,6 +11,7 @@ import ThoughtsOnAIJobMarket from './WillAiTakeYourJob'
 import StartSlide from './StartSlide'
 import LinkToTalkSlide from './LinkToTalkSlide'
 import DemoSlide from './DemoSlide'
+import MinimalServerCode from './MinimalServerCode'
 import { SlideId } from '@/types/SlideId'
 
 type SlideContentComponent = React.FC
@@ -26,10 +27,11 @@ export const SLIDES: { Content: SlideContentComponent, id: string }[] = [
   { Content: McpArchitecture, id: SlideId.McpArchitecture },
   { Content: McpCapabilities, id: SlideId.McpCapabilities },
   { Content: UnknownAndUnanswered, id: SlideId.UnknownAndUnanswered },
+  { Content: MinimalServerCode, id: SlideId.MinimalServerCode },
   { Content: DemoSlide, id: SlideId.DemoSlide },
+  { Content: LinkToTalkSlide, id: SlideId.LinkToTalkSlide },
   { Content: ThoughtsOnAIJobMarket, id: SlideId.WillAiTakeYourJob },
   { Content: QuestionsSlide, id: SlideId.QuestionsSlide },
-  { Content: LinkToTalkSlide, id: SlideId.LinkToTalkSlide },
 ]
 
 export const FADE_VARIANTS = {
