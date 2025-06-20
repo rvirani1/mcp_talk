@@ -4,7 +4,7 @@ import { motion } from 'framer-motion'
 import { useEffect, useState, useImperativeHandle, forwardRef } from 'react'
 import Image from 'next/image'
 import mcpLogo from '../../_images/mcp_logo.png'
-import { SlideWithAnimations } from '../index'
+import type { SlideWithAnimations } from '../index'
 
 // Icon components
 const NewIcon = () => (
@@ -116,12 +116,13 @@ const McpOverview = forwardRef<SlideWithAnimations>((props, ref) => {
 
   // Expose animation interface
   useImperativeHandle(ref, () => ({
-    canAdvanceAnimation: () => stage < 5, // Max 5 stages (0-5)
+    // Max 5 stages (0-5)
     advanceAnimation: () => {
       if (stage < 5) {
         setStage(prev => prev + 1)
       }
-    }
+    }, 
+    canAdvanceAnimation: () => stage < 5,
   }))
 
   useEffect(() => {

@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useImperativeHandle, forwardRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import CarouselElement from './CarouselElement'
-import { CarouselRef } from './index'
+import type { CarouselRef } from './index'
 
 interface CarouselItem {
   component: React.ComponentType
@@ -19,13 +19,13 @@ const Carousel = forwardRef<CarouselRef, CarouselProps>(({ items }, ref) => {
 
   // Expose methods for parent component
   useImperativeHandle(ref, () => ({
-    canAdvance: () => currentIndex < items.length - 1,
     advance: () => {
       if (currentIndex < items.length - 1) {
         setCurrentIndex(prev => prev + 1)
       }
     },
-    getCurrentIndex: () => currentIndex
+    canAdvance: () => currentIndex < items.length - 1,
+    getCurrentIndex: () => currentIndex,
   }))
 
   useEffect(() => {

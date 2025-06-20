@@ -1,7 +1,7 @@
 import { motion, AnimatePresence } from 'framer-motion'
 import { useState, useImperativeHandle, forwardRef } from 'react'
+import type { SlideWithAnimations } from '../index'
 import PageHeader from '@/app/_components/PageHeader'
-import { SlideWithAnimations } from '../index'
 
 // Icon components
 const ClientIcon = () => (
@@ -276,12 +276,12 @@ const McpToolFlow = forwardRef<SlideWithAnimations>((props, ref) => {
 
   // Expose animation interface
   useImperativeHandle(ref, () => ({
-    canAdvanceAnimation: () => currentStage < stages.length - 1,
     advanceAnimation: () => {
       if (currentStage < stages.length - 1) {
         setCurrentStage(prev => prev + 1)
       }
-    }
+    },
+    canAdvanceAnimation: () => currentStage < stages.length - 1,
   }))
 
   const handleKeyDown = (e: React.KeyboardEvent) => {

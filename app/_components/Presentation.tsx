@@ -74,7 +74,8 @@ export default function Presentation() {
                 Mobile Notice
               </p>
               <p className="text-xs text-amber-700 mt-1 leading-relaxed">
-                This presentation was designed for live desktop presentation and may not display optimally on mobile devices. For the best experience, view on a larger screen.
+                This presentation was designed for live desktop presentation and may not
+                display optimally on mobile devices. For the best experience, view on a larger screen.
               </p>
             </div>
           </div>

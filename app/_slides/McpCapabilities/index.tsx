@@ -3,7 +3,7 @@
 import { useState, useEffect, useImperativeHandle, forwardRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import PageHeader from '../../_components/PageHeader'
-import { SlideWithAnimations } from '../index'
+import type { SlideWithAnimations } from '../index'
 
 type DetailView = 'tools' | 'resources' | 'sampling' | null
 
@@ -19,12 +19,12 @@ const McpCapabilities = forwardRef<SlideWithAnimations>((props, ref) => {
 
   // Expose animation interface
   useImperativeHandle(ref, () => ({
-    canAdvanceAnimation: () => stage < 3 && !detailView,
     advanceAnimation: () => {
       if (stage < 3 && !detailView) {
         setStage(prev => prev + 1)
       }
-    }
+    },
+    canAdvanceAnimation: () => stage < 3 && !detailView,
   }))
 
   useEffect(() => {

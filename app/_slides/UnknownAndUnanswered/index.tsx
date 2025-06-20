@@ -1,6 +1,6 @@
 import { useEffect, useState, useImperativeHandle, forwardRef } from 'react'
 import PageHeader from '../../_components/PageHeader'
-import { SlideWithAnimations } from '../index'
+import type { SlideWithAnimations } from '../index'
 
 const UnknownAndUnanswered = forwardRef<SlideWithAnimations>((props, ref) => {
   const [visibleCards, setVisibleCards] = useState(0)
@@ -30,12 +30,12 @@ const UnknownAndUnanswered = forwardRef<SlideWithAnimations>((props, ref) => {
 
   // Expose animation interface
   useImperativeHandle(ref, () => ({
-    canAdvanceAnimation: () => visibleCards < challenges.length,
     advanceAnimation: () => {
       if (visibleCards < challenges.length) {
         setVisibleCards(prev => prev + 1)
       }
-    }
+    },
+    canAdvanceAnimation: () => visibleCards < challenges.length,
   }))
 
   useEffect(() => {
