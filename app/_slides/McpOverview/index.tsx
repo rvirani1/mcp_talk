@@ -1,9 +1,10 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useImperativeHandle, forwardRef } from 'react'
 import Image from 'next/image'
 import mcpLogo from '../../_images/mcp_logo.png'
+import { SlideWithAnimations } from '../index'
 
 // Icon components
 const NewIcon = () => (
@@ -87,7 +88,7 @@ const cardVariants = {
   },
 }
 
-export default function McpOverview() {
+const McpOverview = forwardRef<SlideWithAnimations>((props, ref) => {
   const [stage, setStage] = useState(0)
 
   const cards = [
@@ -112,6 +113,16 @@ export default function McpOverview() {
       title: 'LSP Inspired',
     },
   ]
+
+  // Expose animation interface
+  useImperativeHandle(ref, () => ({
+    canAdvanceAnimation: () => stage < 5, // Max 5 stages (0-5)
+    advanceAnimation: () => {
+      if (stage < 5) {
+        setStage(prev => prev + 1)
+      }
+    }
+  }))
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
@@ -196,4 +207,6 @@ export default function McpOverview() {
       </motion.div>
     </div>
   )
-}
+})
+
+export default McpOverview

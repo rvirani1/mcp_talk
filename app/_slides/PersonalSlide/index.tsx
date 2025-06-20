@@ -1,7 +1,8 @@
 'use client'
 
-import React, { useEffect } from 'react'
+import React, { useEffect, useImperativeHandle, forwardRef, useRef } from 'react'
 import { motion, useAnimation } from 'framer-motion'
+import type { SlideWithAnimations } from '../index'
 import Carousel from './Carousel'
 import CodingJourneyContent from './contents/CodingJourneyContent'
 import SuccessContent from './contents/SuccessContent'
@@ -28,9 +29,27 @@ const carouselItems = [
   },
 ]
 
-export default function PersonalSlide() {
+// Interface for Carousel to expose its methods
+export interface CarouselRef {
+  canAdvance: () => boolean
+  advance: () => void
+  getCurrentIndex: () => number
+}
+
+const PersonalSlide = forwardRef<SlideWithAnimations>((props, ref) => {
   const titleControls = useAnimation()
   const carouselControls = useAnimation()
+  const carouselRef = useRef<CarouselRef | null>(null)
+
+  // Expose animation interface
+  useImperativeHandle(ref, () => ({
+    advanceAnimation: () => {
+      if (carouselRef.current) {
+        carouselRef.current.advance()
+      }
+    },
+    canAdvanceAnimation: () => carouselRef.current ? carouselRef.current.canAdvance() : false,
+  }))
 
   useEffect(() => {
     const animateSequence = async () => {
@@ -71,8 +90,10 @@ export default function PersonalSlide() {
         initial={{ opacity: 0 }}
         animate={carouselControls}
       >
-        <Carousel items={carouselItems} />
+        <Carousel items={carouselItems} ref={carouselRef} />
       </motion.div>
     </div>
   )
-}
+})
+
+export default PersonalSlide

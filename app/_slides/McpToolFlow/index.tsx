@@ -1,6 +1,7 @@
 import { motion, AnimatePresence } from 'framer-motion'
-import { useState } from 'react'
+import { useState, useImperativeHandle, forwardRef } from 'react'
 import PageHeader from '@/app/_components/PageHeader'
+import { SlideWithAnimations } from '../index'
 
 // Icon components
 const ClientIcon = () => (
@@ -269,14 +270,24 @@ const ModalContent = ({ type, onClose }: ModalContentProps) => {
   )
 }
 
-export default function McpToolFlow() {
+const McpToolFlow = forwardRef<SlideWithAnimations>((props, ref) => {
   const [modalType, setModalType] = useState<ModalType>(null)
   const [currentStage, setCurrentStage] = useState(0)
+
+  // Expose animation interface
+  useImperativeHandle(ref, () => ({
+    canAdvanceAnimation: () => currentStage < stages.length - 1,
+    advanceAnimation: () => {
+      if (currentStage < stages.length - 1) {
+        setCurrentStage(prev => prev + 1)
+      }
+    }
+  }))
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === 'Escape') {
       setModalType(null)
-    } else if (e.key === 'ArrowDown' || e.key === ' ') {
+    } else if (e.key === 'ArrowDown') {
       setCurrentStage(prev => Math.min(prev + 1, stages.length - 1))
     } else if (e.key === 'ArrowUp') {
       setCurrentStage(prev => Math.max(prev - 1, 0))
@@ -422,4 +433,6 @@ export default function McpToolFlow() {
       </AnimatePresence>
     </div>
   )
-}
+})
+
+export default McpToolFlow

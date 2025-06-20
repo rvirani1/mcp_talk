@@ -1,5 +1,6 @@
 import { motion, AnimatePresence } from 'framer-motion'
-import { useState } from 'react'
+import { useState, useImperativeHandle, forwardRef } from 'react'
+import type { SlideWithAnimations } from '../index'
 import PageHeader from '@/app/_components/PageHeader'
 
 // Icon components
@@ -702,14 +703,24 @@ const SpeechBubbleModal = ({ isOpen, onClose, title, requestMethod, exampleRespo
   )
 }
 
-export default function McpArchitecture() {
+const McpArchitecture = forwardRef<SlideWithAnimations>((props, ref) => {
   const [currentStage, setCurrentStage] = useState(0)
   const [speechBubbleModalOpen, setSpeechBubbleModalOpen] = useState(false)
+
+  // Expose animation interface
+  useImperativeHandle(ref, () => ({
+    advanceAnimation: () => {
+      if (currentStage < stages.length - 1) {
+        setCurrentStage(prev => prev + 1)
+      }
+    },
+    canAdvanceAnimation: () => currentStage < stages.length - 1,
+  }))
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === 'Escape') {
       setSpeechBubbleModalOpen(false)
-    } else if (e.key === 'ArrowRight' || e.key === ' ') {
+    } else if (e.key === 'ArrowRight') {
       setCurrentStage(prev => Math.min(prev + 1, stages.length - 1))
     } else if (e.key === 'ArrowLeft') {
       setCurrentStage(prev => Math.max(prev - 1, 0))
@@ -861,4 +872,6 @@ export default function McpArchitecture() {
       </AnimatePresence>
     </div>
   )
-}
+})
+
+export default McpArchitecture

@@ -1,12 +1,13 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useImperativeHandle, forwardRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import PageHeader from '../../_components/PageHeader'
+import { SlideWithAnimations } from '../index'
 
 type DetailView = 'tools' | 'resources' | 'sampling' | null
 
-export default function McpCapabilities() {
+const McpCapabilities = forwardRef<SlideWithAnimations>((props, ref) => {
   const [stage, setStage] = useState(1)
   const [detailView, setDetailView] = useState<DetailView>(null)
 
@@ -15,6 +16,16 @@ export default function McpCapabilities() {
     exit: { opacity: 0, y: -50 },
     initial: { opacity: 0, y: 50 },
   }
+
+  // Expose animation interface
+  useImperativeHandle(ref, () => ({
+    canAdvanceAnimation: () => stage < 3 && !detailView,
+    advanceAnimation: () => {
+      if (stage < 3 && !detailView) {
+        setStage(prev => prev + 1)
+      }
+    }
+  }))
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
@@ -505,4 +516,6 @@ export default function McpCapabilities() {
       </div>
     </div>
   )
-}
+})
+
+export default McpCapabilities

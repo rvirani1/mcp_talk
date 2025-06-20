@@ -1,8 +1,9 @@
 'use client'
 
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useImperativeHandle, forwardRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import CarouselElement from './CarouselElement'
+import { CarouselRef } from './index'
 
 interface CarouselItem {
   component: React.ComponentType
@@ -13,8 +14,19 @@ interface CarouselProps {
   items: CarouselItem[]
 }
 
-export default function Carousel({ items }: CarouselProps) {
+const Carousel = forwardRef<CarouselRef, CarouselProps>(({ items }, ref) => {
   const [currentIndex, setCurrentIndex] = useState(0)
+
+  // Expose methods for parent component
+  useImperativeHandle(ref, () => ({
+    canAdvance: () => currentIndex < items.length - 1,
+    advance: () => {
+      if (currentIndex < items.length - 1) {
+        setCurrentIndex(prev => prev + 1)
+      }
+    },
+    getCurrentIndex: () => currentIndex
+  }))
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
@@ -54,4 +66,6 @@ export default function Carousel({ items }: CarouselProps) {
       </AnimatePresence>
     </div>
   )
-} 
+}) 
+
+export default Carousel 

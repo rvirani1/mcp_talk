@@ -1,7 +1,8 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useImperativeHandle, forwardRef } from 'react'
 import PageHeader from '../../_components/PageHeader'
+import { SlideWithAnimations } from '../index'
 
-export default function UnknownAndUnanswered() {
+const UnknownAndUnanswered = forwardRef<SlideWithAnimations>((props, ref) => {
   const [visibleCards, setVisibleCards] = useState(0)
 
   const challenges = [
@@ -26,6 +27,16 @@ export default function UnknownAndUnanswered() {
       title: 'Debugging',
     },
   ]
+
+  // Expose animation interface
+  useImperativeHandle(ref, () => ({
+    canAdvanceAnimation: () => visibleCards < challenges.length,
+    advanceAnimation: () => {
+      if (visibleCards < challenges.length) {
+        setVisibleCards(prev => prev + 1)
+      }
+    }
+  }))
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
@@ -70,4 +81,6 @@ export default function UnknownAndUnanswered() {
       </div>
     </div>
   )
-}
+})
+
+export default UnknownAndUnanswered

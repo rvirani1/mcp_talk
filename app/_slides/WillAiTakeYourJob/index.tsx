@@ -1,8 +1,19 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useImperativeHandle, forwardRef } from 'react'
 import PageHeader from '@/app/_components/PageHeader'
+import { SlideWithAnimations } from '../index'
 
-export default function ThoughtsOnAIJobMarket() {
+const ThoughtsOnAIJobMarket = forwardRef<SlideWithAnimations>((props, ref) => {
   const [currentStage, setCurrentStage] = useState(0)
+
+  // Expose animation interface
+  useImperativeHandle(ref, () => ({
+    canAdvanceAnimation: () => currentStage < 3, // Max 3 stages (0-3)
+    advanceAnimation: () => {
+      if (currentStage < 3) {
+        setCurrentStage(prev => prev + 1)
+      }
+    }
+  }))
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
@@ -43,4 +54,6 @@ export default function ThoughtsOnAIJobMarket() {
       </div>
     </div>
   </div>
-}
+})
+
+export default ThoughtsOnAIJobMarket
